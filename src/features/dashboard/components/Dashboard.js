@@ -1,41 +1,33 @@
-import Card from "@/shared/ui/Card"
+// src/features/dashboard/components/Dashboard.js
+"use client";
 
-const cards = [
-  {
-    title: "Total Employees",
-    value: "240",
-  },
-  {
-    title: "Present Today",
-    value: "210",
-  },
-  {
-    title: "On Leave",
-    value: "18",
-  },
-  {
-    title: "Pending Requests",
-    value: "12",
-  },
-]
-export default function DashboardCards() {
+import DashboardCards from "./DashboardCards";
+import RecentActivities from "./RecentActivities";
+import AttendanceSummary from "./AttendanceSummary";
+import { RefreshCcw } from "lucide-react";
+
+export default function Dashboard() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    <div className="space-y-8 animate-in fade-in duration-500">
+      {/* Header */}
+      <div className="flex justify-between items-center">
+        <div>
+          <h2 className="text-lg font-black text-slate-800 uppercase tracking-tight">Dashboard</h2>
+          <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">Real-time HR Analytics</p>
+        </div>
+        <button className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-100 rounded-xl text-[10px] font-black uppercase text-slate-600 hover:shadow-sm transition-all">
+          <RefreshCcw size={14} /> Refresh
+        </button>
+      </div>
 
-      {cards.map((card) => (
-        <Card key={card.title}>
+      {/* Stats Section */}
+      <DashboardCards />
 
-          <p className="text-gray-500 text-sm mb-2">
-            {card.title}
-          </p>
-
-          <h2 className="text-3xl font-bold text-gray-800">
-            {card.value}
-          </h2>
-
-        </Card>
-      ))}
-
+      {/* Main Grid: Lists and Charts */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <RecentActivities />
+        <AttendanceSummary />
+      </div>
     </div>
-  )
+  );
 }
